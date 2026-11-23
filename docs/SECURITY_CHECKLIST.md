@@ -1,0 +1,11 @@
+# Seguridad previa a producción
+- [ ] Autenticación y permisos por rol.
+- [ ] Aislamiento multiempresa probado, incluida prueba de acceso cruzado.
+- [ ] PostgreSQL con controles por tenant.
+- [ ] Secretos en gestor de secretos/variables de entorno.
+- [ ] HTTPS y cifrado de datos sensibles.
+- [ ] Límites de tasa, auditoría y logs minimizados.
+- [ ] Política de retención/borrado y backups probados.
+- [ ] Consentimiento, avisos y contratos RGPD revisados.
+- [ ] Verificación de agenda antes de confirmar reservas.
+- [ ] Derivación humana y plan de recuperación ante fallos.
