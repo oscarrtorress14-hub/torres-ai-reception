@@ -16,6 +16,7 @@ SECRET = "local-test-secret"
 @pytest.fixture
 def client(tmp_path, monkeypatch):
     monkeypatch.setenv("ELEVENLABS_WEBHOOK_SECRET", SECRET)
+    monkeypatch.setenv("ELEVENLABS_AGENT_ID", "test-agent")
     monkeypatch.setattr(webhook, "DB_PATH", tmp_path / "test.db")
     return TestClient(app)
 
@@ -135,3 +136,10 @@ def test_transcription_content_is_not_stored(client):
         ).fetchall()
 
     assert private_text not in repr(rows)
+
+
+def test_rejects_unauthorized_agent(client):
+    payload = {"type": "post_call_transcription", "data": {"conversation_id": "foreign-agent", "agent_id": "unauthorized-agent"}}
+    body, headers = signed_headers(payload)
+    response = client.post("/webhooks/elevenlabs", content=body, headers=headers)
+    assert response.status_code == 403
