@@ -2,8 +2,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
 import sqlite3
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
+from .admin_auth import AdminAuthMiddleware
 from pydantic import BaseModel, Field
 from .elevenlabs_webhook import router as elevenlabs_webhook_router
 
@@ -11,6 +13,7 @@ DB = Path(__file__).resolve().parent.parent / "demo.db"
 app = FastAPI(title="Torres AI Reception", version="0.1.0",
  description="Prototipo de demostración con datos ficticios; sin conexiones reales.")
 app.include_router(elevenlabs_webhook_router)
+app.add_middleware(AdminAuthMiddleware)
 
 TENANTS = {"peluqueria-demo": {
  "name": "Barbería Central (negocio ficticio)",
