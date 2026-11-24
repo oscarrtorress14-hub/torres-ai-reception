@@ -60,4 +60,3 @@ class AdminAuthMiddleware(BaseHTTPMiddleware):
             media_type="application/json",
             headers={"WWW-Authenticate": 'Basic realm="TORRES AI Admin"'},
         )
-
