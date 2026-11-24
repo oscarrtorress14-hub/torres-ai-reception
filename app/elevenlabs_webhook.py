@@ -9,7 +9,7 @@ from fastapi import APIRouter, HTTPException, Request
 router = APIRouter()
 DB_PATH = Path(__file__).resolve().parent.parent / "demo.db"
 MAX_BODY_BYTES = 256 * 1024
-ALLOWED_EVENTS = {"post_call_transcription", "post_call_audio", "call_initiation_failure"}
+ALLOWED_EVENTS = {"post_call_transcription", "call_initiation_failure"}
 
 def _db():
     c = sqlite3.connect(DB_PATH)
